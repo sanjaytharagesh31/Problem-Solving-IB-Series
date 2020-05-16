@@ -13,3 +13,14 @@ int Solution::uniquePaths(int A, int B) {
     }
     return dp[A-1][B-1];
 }
+
+//Combination approach
+// int nCr(int n, int r) {
+//     if(r == 0 || n == r)
+//         return 1;
+//     return nCr(n-1, r-1) + nCr(n-1, r);
+// }
+
+// int Solution::uniquePaths(int A, int B) {
+//     return nCr(A+B-2, A-1);
+// }
