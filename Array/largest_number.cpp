@@ -1,3 +1,27 @@
+//A simpler solution
+
+bool comp(int a, int b) {
+    string str1 = to_string(a) + to_string(b);
+    string str2 = to_string(b) + to_string(a);
+    return str1>=str2;
+}
+
+string Solution::largestNumber(const vector<int> &A) {
+    vector<int> tmp(A);
+    string ans = "";
+    bool flag = false;
+    sort(tmp.begin(), tmp.end(), comp);
+    for(int x : tmp){
+        if(x != 0 || flag == true) {
+            flag = true;
+            ans += to_string(x);
+        }
+    }
+    if(flag == false)
+        return "0";
+    return ans;
+
+
 bool comp(int a, int b) {
     string str1 = to_string(a) + to_string(b);
     string str2 = to_string(b) + to_string(a);
