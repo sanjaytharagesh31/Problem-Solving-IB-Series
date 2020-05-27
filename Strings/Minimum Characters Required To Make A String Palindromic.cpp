@@ -1,3 +1,33 @@
+//Time: O(N*N)
+//Space: O(1)
+int Solution::solve(string s) {
+    int l = s.length();
+    int dis = 0;
+    for(int i=l-1; i>=0; i--) {
+        int st = 0;
+        int ed = i;
+        while(st <= ed) {
+            if(s[st] == s[ed]) {
+                st++;
+                ed--;
+            }
+            else {
+                break;
+            }
+        }
+        if(st > ed) {
+            dis = i+1;
+            break;
+        }
+    }
+    dis = l - dis;
+    return dis;
+}
+
+
+
+//Time: O(N*N)
+//Space: O(N*N)
 int Solution::solve(string s) {
     int l = s.length();
     vector<vector<bool>> dp(l, vector<bool>(l, false));
