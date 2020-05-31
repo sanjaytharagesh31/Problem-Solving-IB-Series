@@ -1,0 +1,31 @@
+string Solution::convert(string A, int B) {
+    if(B == 1)
+        return A;
+    vector<char> rows[B];
+    int r = 0;
+    int dir = 0;
+    for(int i=0; i<A.length(); i++) {
+        // cout << r << endl;
+        rows[r].push_back(A[i]);
+        if(r<=B-2 && dir==0)
+            r++;
+        else if(r == B-1) {
+            dir = 1;
+            r--;
+        }
+        else if(r>=1 && dir == 1)
+            r--;
+        else if(r == 0) {
+            dir = 0;
+            r++;
+        }
+    }
+    // cout << "copy done" << endl;
+    string ans = "";
+    for(int i=0; i<B; i++) {
+        for(int j=0; j<rows[i].size(); j++) {
+            ans += rows[i][j];
+        }
+    }
+    return ans;
+}
