@@ -1,0 +1,46 @@
+//O(N*N*LogN) Time complexity
+//Partial correct
+
+int bs(vector<int> &A, int p, int i, int j) {
+    long long int a=i;
+    long long int b=j;
+    while(i <= j) {
+        int m = (i+j)/2;
+        if(A[m] == p)
+            return A[m];
+        else if(A[m] < p) 
+            j = m-1;
+        else
+            i = m+1;
+    }
+    if(i>b)
+        return A[j];
+    else if(j<a)
+        return A[i];
+    else if(abs(A[i]-p) < abs(A[j]-p))
+        return A[i];
+    else
+        return A[j];
+    
+}
+
+int Solution::threeSumClosest(vector<int> &A, int B) {
+    sort(A.begin(), A.end());
+    // for(int x : A)
+    //     cout << x << " ";
+    // cout << endl;
+    long long int n = A.size();
+    long long int ans = A[0]+A[1]+A[2];
+    for(int i=0; i<n-2; i++) {
+        for(int j=i+1; j<n-1; j++) {
+            long long int rem = B-(A[i]+A[j]);
+            long long int ret = bs(A, rem, j+1, n-1);
+            if(abs(B-(ret+A[i]+A[j])) < abs(B-ans)) {
+                ans = ret+A[i]+A[j];
+                // cout << i << " " << j << " " << endl;
+                // cout << A[i] << " " << A[j] << " " << ret << " " << ans << endl;
+            }
+        }
+    }
+    return ans;
+}
