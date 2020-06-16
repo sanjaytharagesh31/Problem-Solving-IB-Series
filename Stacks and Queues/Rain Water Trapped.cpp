@@ -1,4 +1,4 @@
-//Extra Space Solution
+//Extra Space Solution usin2 2 arrays
 
 int Solution::trap(const vector<int> &A) {
     int n = A.size();
@@ -18,3 +18,32 @@ int Solution::trap(const vector<int> &A) {
     }
     return ans;
 }
+
+// Stack based solution
+int Solution::trap(const vector<int> &A) {
+    stack<int> s;
+    int mx = A[0];
+    // s.push(A[0]);
+    int ans = 0;
+    for(int i=1; i<A.size(); i++) {
+        if(A[i] <= mx) {
+            s.push(A[i]);
+        }
+        else {
+            while(!s.empty()) {
+                ans += (mx-s.top());
+                s.pop();
+            }
+            s.push(A[i]);
+            mx = A[i];
+        }
+    }
+    if(!s.empty()) {
+        int right = s.top();
+        while(!s.empty()) {
+            ans += max(0, min(mx, right)-s.top());
+            right = max(right, s.top());
+            s.pop();
+        }
+    }
+    return ans;
