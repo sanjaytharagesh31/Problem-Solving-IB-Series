@@ -1,4 +1,4 @@
-//O(2N) time solution
+//O(N) time solution
 
 vector<int> fillAns(vector<int> A) {
     int n = A.size();
