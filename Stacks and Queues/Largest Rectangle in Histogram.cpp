@@ -1,5 +1,42 @@
 //O(N) time solution
+//Single pass to array
 
+int Solution::largestRectangleArea(vector<int> &A) {
+    stack<int> s;
+    int n = A.size();
+    int ans = 0;
+    for(int i=0; i<n; i++) {
+        if(i == 0) {
+            s.push(i);
+        }
+        else if(A[i] >= A[s.top()]) {
+            s.push(i);
+        }
+        else {
+            while(!s.empty() && A[s.top()] > A[i]) {
+                int t = A[s.top()];
+                s.pop();
+                if(!s.empty())
+                    ans = max(ans, t*(i-s.top()-1));
+                else
+                    ans = max(ans, t*(i));
+            }
+            s.push(i);
+        }
+    }
+    while(!s.empty()) {
+        int t = A[s.top()];
+        s.pop();
+        if(!s.empty())
+            ans = max(ans, t*(n-s.top()-1));
+        else
+            ans = max(ans, t*(n));
+    }
+    return ans;   
+}
+
+//O(N) time solution
+// Multiple passes to array
 vector<int> fillAns(vector<int> A) {
     int n = A.size();
     vector<int> ans(n, 0);
