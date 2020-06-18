@@ -6,6 +6,24 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+
+//A simpler solution
+ListNode* Solution::swapPairs(ListNode* A) {
+    ListNode* head = new ListNode(0);
+    head->next = A;
+    ListNode* cur = head;
+    while(cur->next!=NULL && cur->next->next!=NULL) {
+        ListNode* node1 = cur->next;
+        ListNode* node2 = cur->next->next;
+        node1->next = node2->next;
+        node2->next = node1;
+        cur->next = node2;
+        cur = cur->next->next;
+    }
+    return head->next;
+}
+
+//My initial solution
 ListNode* Solution::swapPairs(ListNode* A) {
     ListNode* pre = A;
     ListNode* cur = A->next;
