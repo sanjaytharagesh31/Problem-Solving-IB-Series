@@ -1,3 +1,4 @@
+O(Length of Number) Time and space complexity
 int Solution::colorful(int A) {
     int d = floor(log10(A)+1);
     vector<int> ans;
