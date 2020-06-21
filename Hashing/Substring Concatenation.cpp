@@ -1,5 +1,6 @@
 vector<int> Solution::findSubstring(string A, const vector<string> &B) {
     map<string, int> mp;
+    map<string, int> map;
     vector<int> ans;
     int A_l = A.length();
     int B_l = 0;
@@ -9,8 +10,8 @@ vector<int> Solution::findSubstring(string A, const vector<string> &B) {
     }
     int sz = B[0].size();
     for(int i=0; i+B_l-1<A_l; i++) {
-        map<string, int> map;
         int cnt = 0;
+        map.clear();
         for(int j=i; j<i+B_l; j+=sz) {
             string tmp = A.substr(j, sz);
             if(mp[tmp] > 0 && map[tmp] < mp[tmp]) {
