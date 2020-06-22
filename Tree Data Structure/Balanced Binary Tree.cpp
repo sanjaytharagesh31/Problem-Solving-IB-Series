@@ -1,3 +1,29 @@
+//O(logN) Space due to recursion
+//O(N) Time
+
+int ans;
+
+int solve(TreeNode* root) {
+    if(root == NULL) {
+        return 0;
+    }    
+    else {
+        int hl = solve(root->left);
+        int hr = solve(root->right);
+        if(abs(hl-hr)>=2)
+            ans = 0;
+        return 1+max(hl, hr);
+    }
+}
+
+int Solution::isBalanced(TreeNode* A) {
+    ans = 1;
+    int h = solve(A);
+    return ans;
+}
+
+
+
 //O(N) Space
 //O(N) Time
 /**
