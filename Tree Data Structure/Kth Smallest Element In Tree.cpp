@@ -24,3 +24,26 @@ int Solution::kthsmallest(TreeNode* A, int B) {
     solve(A, 0);
     return ans[B-1];
 }
+
+
+//O(1) Space
+int k;
+int cnt;
+int ans;
+
+void solve(TreeNode* root) {
+    if(root != NULL) {
+        solve(root->left);
+        if(cnt == k)
+            ans = root->val;
+        cnt++;
+        solve(root->right);
+    }
+}
+
+int Solution::kthsmallest(TreeNode* A, int B) {
+    k = B;
+    cnt = 1;
+    solve(A);
+    return ans;
+}
