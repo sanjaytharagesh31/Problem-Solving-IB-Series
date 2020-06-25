@@ -1,3 +1,45 @@
+// Recursive solution
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+
+//Recursive approach
+void flat(TreeNode* root) {
+    if(root == NULL || (root->left == NULL && root->right == NULL))
+        return;
+    else {
+        if(root->left != NULL) {
+            TreeNode* r = root->right;
+            flat(root->left);
+            TreeNode* lst = root->left;
+            while(lst->right != NULL)
+                lst = lst->right;
+            root->right = root->left;
+            root->left = NULL;
+            lst->right = r;
+        }
+        flat(root->right);
+    }
+}
+
+TreeNode* Solution::flatten(TreeNode* A) {
+    if(A == NULL)
+        return NULL;
+    //Recursive approach
+    flat(A);
+    return A;
+}
+
+
+
+//Iterative solution
+
 /**
  * Definition for binary tree
  * struct TreeNode {
