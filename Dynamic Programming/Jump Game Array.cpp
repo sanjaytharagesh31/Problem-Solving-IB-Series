@@ -1,3 +1,22 @@
+//Time: O(N)
+//Space: O(1)
+//Greedy solution
+
+int Solution::canJump(vector<int> &A) {
+    int n = A.size();
+    int jump = A[0];
+    for(int i=1; i<n; i++) {
+        if(jump == 0)
+            return 0;
+        else {
+            jump--;
+            jump = max(jump, A[i]);
+        }
+    }
+    return 1;
+}
+
+
 //Time: O(N*N)
 //Space: O(N)
 //DP solution
