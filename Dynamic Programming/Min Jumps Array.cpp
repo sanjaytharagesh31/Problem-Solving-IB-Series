@@ -16,3 +16,33 @@ int Solution::jump(vector<int> &A) {
     }
     return dp[0];
 }
+
+//TIme: O(N)
+//Space: O(1)
+//Greedy approach
+int Solution::jump(vector<int> &A) {
+    int n = A.size();
+    if(n == 0 || n == 1)
+        return 0;
+    else if(A[0] == 0)
+        return -1;
+    int jump = 1;
+    int mx = A[0];
+    int rem = A[0];
+    for(int i=1; i<n; i++) {
+        if(i == n-1) {
+            return jump;
+        }
+        else {
+            mx = max(mx, i + A[i]);
+            rem--;
+            if(rem == 0) {
+                jump++;
+                rem = mx - i;
+                if(rem <= 0)
+                    return -1;
+            }
+        }
+    }
+    return jump;
+}
