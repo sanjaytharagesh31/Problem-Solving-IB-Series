@@ -43,3 +43,29 @@ vector<int> Solution::solve(int A, vector<int> &B) {
     }
     return ans;
 }
+
+//Time: O(N)
+//Space: O(N)
+//Greedy Approach - Accepted
+vector<int> Solution::solve(int A, vector<int> &B) {
+    int n = B.size();
+    int mn = 0;
+    for(int i=0; i<n; i++) {
+        if(B[mn] > B[i])
+            mn = i;
+    }
+    int l = A/B[mn];
+    vector<int> ans(l, mn);
+    int total = l*B[mn];
+    int ind = 0;
+    for(int i=0; i<l && ind<mn; ) {
+        if(total-B[ans[i]]+B[ind] <= A) {
+            total = total-B[ans[i]]+B[ind];
+            ans[i] = ind;
+            i++;
+        }
+        else {
+            ind++;
+        }
+    }
+    return ans;
